@@ -1,7 +1,7 @@
 import React from 'react'
 import { useRecoilState, useRecoilValue } from 'recoil';
-import {filteredTodoListState} from '../state/selectors';
-import {todoListState} from '../state/atoms';
+import { filteredTodoListState } from '../state/selectors';
+import { todoListState } from '../state/atoms';
 
 function TodoItem() {
 
@@ -34,7 +34,6 @@ function TodoItem() {
     setTodoList(todos);
   }
 
-
   return (<>
 
     {filteredTodos.map((item, index) => (
@@ -50,8 +49,8 @@ function TodoItem() {
       </li>
     ))}
 
-    
-    </>
+
+  </>
   )
 }
 

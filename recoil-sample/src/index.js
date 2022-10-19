@@ -12,7 +12,6 @@ root.render(
       <App />
     </RecoilRoot>
 
-
   </React.StrictMode>
 );
 

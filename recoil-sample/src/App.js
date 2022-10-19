@@ -1,20 +1,9 @@
-import { useState } from 'react';
-import { atom, selector, useRecoilState, useRecoilValue } from 'recoil';
 import './App.css';
 import TodoItem from './components/TodoItem';
 import TodoItemCreator from './components/TodoItemCreator';
 import TodoListFilters from './components/TodoListFilters';
 
-
-
-
-
 function App() {
-
-
-
-
-
 
   return (<>
 
