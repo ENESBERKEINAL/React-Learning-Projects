@@ -1,24 +1,48 @@
-import logo from './logo.svg';
+import { useState } from 'react';
+import { atom, useRecoilState } from 'recoil';
 import './App.css';
 
+const todoListState = atom({
+  key: 'todoListState',
+  default: ['Apple', 'Egg', 'Butter'],
+})
+
+
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+
+  const [todoList, setTodoList] = useRecoilState(todoListState);
+  const [todo, setTodo] = useState('');
+
+
+  const deleteElementAt = (index) => {
+    const todos = [...todoList];
+    todos.splice(index, 1);
+    setTodoList(todos);
+  }
+
+  const editItemAt = (index) => {
+    const todos = [...todoList];
+
+    let newItemName = prompt('Edit the todo', todoList[index])
+
+    todos[index] = newItemName;
+
+    setTodoList(todos);
+  }
+
+  return (<>
+
+    {todoList.map((item, index) => (
+      <li key={item} style={{ marginLeft: '10px' }}>{item}
+        <button onClick={() => deleteElementAt(index)}>Delete</button>
+        <button onClick={() => editItemAt(index)}>Edit</button>
+      </li>
+    ))}
+
+    <input value={todo} onChange={(e) => setTodo(e.target.value)} />
+
+    <button onClick={() => setTodoList((todos) => [...todos, todo])} > Add</button>
+  </>
   );
 }
 
