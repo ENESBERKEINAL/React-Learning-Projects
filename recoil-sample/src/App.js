@@ -4,14 +4,18 @@ import './App.css';
 
 const todoListState = atom({
   key: 'todoListState',
-  default: ['Apple', 'Egg', 'Butter'],
+  default: [
+    {name: 'Apple', isCompleted: false},
+    {name: 'Egg', isCompleted: false},
+    {name: 'Butter', isCompleted: false},
+  ]
 })
 
 
 function App() {
 
   const [todoList, setTodoList] = useRecoilState(todoListState);
-  const [todo, setTodo] = useState('');
+  const [todo, setTodo] = useState({name: ''});
 
 
   const deleteElementAt = (index) => {
@@ -22,10 +26,11 @@ function App() {
 
   const editItemAt = (index) => {
     const todos = [...todoList];
-
+    const todo = todoList[index];
+    
     let newItemName = prompt('Edit the todo', todoList[index])
 
-    todos[index] = newItemName;
+    todos[index] = {...todo, name : newItemName};
 
     setTodoList(todos);
   }
@@ -33,13 +38,13 @@ function App() {
   return (<>
 
     {todoList.map((item, index) => (
-      <li key={item} style={{ marginLeft: '10px' }}>{item}
+      <li key={item.name} style={{ marginLeft: '10px' }}>{item.name}
         <button onClick={() => deleteElementAt(index)}>Delete</button>
         <button onClick={() => editItemAt(index)}>Edit</button>
       </li>
     ))}
 
-    <input value={todo} onChange={(e) => setTodo(e.target.value)} />
+    <input value={todo.name} onChange={(e) => setTodo({name : e.target.value})} />
 
     <button onClick={() => setTodoList((todos) => [...todos, todo])} > Add</button>
   </>
