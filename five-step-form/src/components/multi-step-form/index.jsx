@@ -11,7 +11,7 @@ const Steps = {
   step1:{
     component: Step1,
     title:"Enesss" ,
-    subTitle:"Please write down your personal info down below",
+    subTitle:"Please write down your personal info down below step1",
     hasNextButton:true,
   },
   step2:{
@@ -37,11 +37,9 @@ const Steps = {
 }
 
 
-
-
 function MultiStepForm() {
 
-  const [activeStep, setActiveStep] = useState('step2')
+  const [activeStep, setActiveStep] = useState('step1')
   const ActiveStep = Steps[activeStep].component
 
   return (

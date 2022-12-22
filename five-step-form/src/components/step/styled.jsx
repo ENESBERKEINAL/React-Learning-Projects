@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const StepForm = styled.form`
+export const Step = styled.form`
     display: flex;
     flex-direction: column;
     gap:24px;

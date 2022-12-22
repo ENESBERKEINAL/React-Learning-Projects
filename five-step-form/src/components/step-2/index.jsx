@@ -4,7 +4,11 @@ import Step from '../step'
 
 function Step2(props) {
   return (
-      <Step {...props}></Step>
+    
+    <Step {...props}>
+    
+    <div>asdfsadfds</div>
+    </Step>
   )
 }
 

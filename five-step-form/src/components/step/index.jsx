@@ -6,25 +6,26 @@ function Step({
   subTitle,
   hasBackButton,
   hasNextButton,
-  childeren
+  children
 }) {
   return (
     
-    <S.StepForm>
+    <S.Step>
       <S.StepHeader>
         <S.Title>{title}</S.Title>
         <S.SubTitle>{subTitle}</S.SubTitle>
 
       </S.StepHeader>
       <S.Body>
-      {childeren}
+      {console.log("childeren are",children)}
+      {children}
       </S.Body>
       <S.StepFooter>
       {hasBackButton &&  <S.GoBackButton>Go Back</S.GoBackButton> }
       {hasNextButton &&   <S.GoNextButton>Next Step</S.GoNextButton> }
       </S.StepFooter>
 
-    </S.StepForm>
+    </S.Step>
   )
 }
 
