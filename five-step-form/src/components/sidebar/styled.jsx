@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled,{css} from "styled-components";
 
 import SidebarBG from "../../assets/bg-sidebar-desktop.svg"
 
@@ -16,12 +16,6 @@ export const SideBar = styled.div`
     border-radius: 8px;
 `
 
-export const Item = styled.div`
-    display: flex;
-    align-items: center;
-    gap: 8px;
-`
-
 export const ItemNumber = styled.span`
     width: 36px;
     height: 36px;
@@ -30,6 +24,22 @@ export const ItemNumber = styled.span`
     display:flex;
     justify-content: center;
     align-items:center;
+`
+
+export const Item = styled.div`
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    ${ItemNumber}{
+
+        ${({isActive}) => isActive && css`
+        color: var(--marine-blue);
+        background-color: var(--magnolia);
+        border-color: var(--magnolia)
+        `}
+    }
+
 `
 
 export const ItemBody = styled.div``

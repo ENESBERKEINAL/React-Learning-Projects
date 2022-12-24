@@ -6,7 +6,9 @@ import FormsJSON from '../../form.json'
 
 function Step1(props) {
   const {step1} = FormsJSON
-  console.log("pros from out", step1)
+  const hasError = false
+
+
   return (<>
     
     <Step {...props}>
@@ -16,10 +18,12 @@ function Step1(props) {
     {
       step1.map( (item) => (
 
-        <S.FormItem key={item.id}>
+        <S.FormItem key={item.id} hasError={hasError}>
         <S.Label htmlFor={item.id}> {item.label}</S.Label>
         <S.Input name={item.id} type={item.type} placeholder={item.placeholder}/>
-        <S.ErrorMessage>Required</S.ErrorMessage>
+        
+        
+        {hasError && (<S.ErrorMessage>Required</S.ErrorMessage>)}
         </S.FormItem>
         )
         

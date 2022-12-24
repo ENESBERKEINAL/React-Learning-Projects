@@ -17,7 +17,6 @@ function Step({
 
       </S.StepHeader>
       <S.Body>
-      {console.log("childeren are",children)}
       {children}
       </S.Body>
       <S.StepFooter>
