@@ -4,17 +4,21 @@ import * as S from './styled'
 
 import FormsJSON from '../../form.json'
 
-function Step1(props) {
+function Step1({onStepSubmit ,...props}) {
   const {step1} = FormsJSON
   const hasError = false
 
+  const onSubmit = (e) => {
+    e.preventDefault();
 
+    var formData = new FormData(e.target);
+    let formProperties = Object.fromEntries(formData.entries);
+
+    onStepSubmit('step1', formProperties)
+  }
   return (<>
-    
-    <Step {...props}>
+    <Step {...props} handleSubmit={onSubmit}>
     <S.Step1>
-    
-    
     {
       step1.map( (item) => (
 

@@ -13,7 +13,7 @@ import {
 
 const {step2} = FromJSON;
 
-function Step2(props) {
+function Step2({onStepSubmit, ...props}) {
   const [plan, setPlan] = useState(DEFAULT_PLAN)
   const [billingType, setBillingType] = useState(DEFAULT_BILLING_TYPE)
 
@@ -26,16 +26,29 @@ function Step2(props) {
   const changeBillingType = (newBillingType) => {
     setBillingType(newBillingType)
   }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    var formData = new FormData(e.target);
+    let formProperties = Object.fromEntries(formData.entries);
+
+    onStepSubmit('step2', {
+      billingType,
+      plan
+    })
+  }
+
   return (
     
-    <Step {...props}>
+    <Step {...props} handleSubmit={onSubmit}>
       <S.Step2>
         <S.RadioGroup>
           {
             step2[billingType].map((item) => (
 
-              <S.RadioLabel key={item.id} isSelected={item.id === plan}>
-                <S.RadioInput name='plan-type' type="radio" onChange={() => changePlan(item.id)} />
+              <S.RadioLabel key={item.id} isSelected={item.id === plan.id}>
+                <S.RadioInput name='plan-type' type="radio" onChange={() => changePlan(item)} />
                 <S.Icon src={Icons[item.id]} />
                 <S.Title>{item.title}</S.Title>
                 <S.SubTitle>{item.price}</S.SubTitle>

@@ -5,10 +5,10 @@ import FormJSON from '../../form.json'
 
 const {step3} = FormJSON
 
-function Step3(props) {
+function Step3({ onStepSubmit, formData,...props}) {
   const [selectedAddons, setSelectedAddons] = useState([])
 
-  const billingType = 'monthly'
+  const {billingType} = formData.step2
 
   const changeSelectedAddons = (checked , selectedAddon) => {
     if(checked){
@@ -23,8 +23,14 @@ function Step3(props) {
   const setSelected = (id) => {
     return selectedAddons.some((i) => i.id === id)
   }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+
+    onStepSubmit('step3', {selectedAddons})
+  }
  
-  return (<Step {...props}>
+  return (<Step {...props} handleSubmit={onSubmit}>
     <S.Step3>
     {step3[billingType].map((item) => (
         <S.Item key={item.id} isSelected={setSelected(item.id)}>
