@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Step from '../step'
 import * as S from './styled'
 import FromJSON from '../../form.json'
@@ -13,11 +13,20 @@ import {
 
 const {step2} = FromJSON;
 
-function Step2({onStepSubmit, ...props}) {
+function Step2({onStepSubmit, formData, ...props}) {
   const [plan, setPlan] = useState(DEFAULT_PLAN)
   const [billingType, setBillingType] = useState(DEFAULT_BILLING_TYPE)
 
-
+  useEffect(() => {
+    let {plan} = formData?.step2
+    let {billingType} = formData?.step2
+  
+    return () => {
+      plan && setPlan(plan)
+      billingType && setBillingType(billingType)
+    }
+  }, [])
+  
 
   const changePlan = (newPlan) => {
     setPlan(newPlan)

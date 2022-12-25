@@ -4,7 +4,7 @@ import * as S from './styled'
 
 import FormsJSON from '../../form.json'
 
-function Step1({onStepSubmit ,...props}) {
+function Step1({onStepSubmit, formData ,...props}) {
   const {step1} = FormsJSON
   const hasError = false
 
@@ -24,7 +24,9 @@ function Step1({onStepSubmit ,...props}) {
 
         <S.FormItem key={item.id} hasError={hasError}>
         <S.Label htmlFor={item.id}> {item.label}</S.Label>
-        <S.Input name={item.id} type={item.type} placeholder={item.placeholder}/>
+        <S.Input 
+        defaultValue={formData.step1[item.id]}
+        name={item.id} type={item.type} placeholder={item.placeholder}/>
         
         
         {hasError && (<S.ErrorMessage>Required</S.ErrorMessage>)}

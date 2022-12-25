@@ -6,7 +6,7 @@ import FormJSON from '../../form.json'
 const {step3} = FormJSON
 
 function Step3({ onStepSubmit, formData,...props}) {
-  const [selectedAddons, setSelectedAddons] = useState([])
+  const [selectedAddons, setSelectedAddons] = useState( formData.step3.selectedAddons ?? [])
 
   const {billingType} = formData.step2
 
@@ -20,7 +20,7 @@ function Step3({ onStepSubmit, formData,...props}) {
     }
   }
 
-  const setSelected = (id) => {
+  const checkSelected = (id) => {
     return selectedAddons.some((i) => i.id === id)
   }
 
@@ -29,12 +29,15 @@ function Step3({ onStepSubmit, formData,...props}) {
 
     onStepSubmit('step3', {selectedAddons})
   }
- 
+
   return (<Step {...props} handleSubmit={onSubmit}>
     <S.Step3>
     {step3[billingType].map((item) => (
-        <S.Item key={item.id} isSelected={setSelected(item.id)}>
-          <S.Input type='checkbox' onChange={ (e) => changeSelectedAddons(e.target.checked, item)}/>
+      
+        <S.Item key={item.id} isSelected={checkSelected(item.id)}>
+          <S.Input type='checkbox' 
+          onChange={ (e) => changeSelectedAddons(e.target.checked, item)} 
+          defaultChecked={checkSelected(item.id)}/>
           <S.InputBody>
             <S.Title>{item.title}</S.Title>
             <S.SubTitle>{item.description}</S.SubTitle>
@@ -42,7 +45,8 @@ function Step3({ onStepSubmit, formData,...props}) {
           <S.Price>{item.price}</S.Price>
         </S.Item>
       
-      ))  
+      )
+      )  
     }
 
     </S.Step3>
